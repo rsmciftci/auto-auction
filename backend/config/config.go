@@ -1,6 +1,7 @@
 package config
 
 import (
+	"backend/models"
 	"fmt"
 
 	"gorm.io/driver/postgres"
@@ -23,6 +24,8 @@ func DatabaseInit() {
 	if err != nil {
 		panic(err)
 	}
+
+	db.AutoMigrate(&models.User{}, &models.Auction{}) // TODO: check if works, also add other tables
 }
 
 func DB() *gorm.DB {
