@@ -1,0 +1,13 @@
+
+.signInText {
+    font-size: 13px;
+}
+
+.signInImage {
+    width: 40px;
+}
+
+.signInDiv:hover {
+    border: 2px solid cyan;
+    border-radius: 10px;
+}
