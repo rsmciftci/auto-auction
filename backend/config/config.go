@@ -25,7 +25,7 @@ func DatabaseInit() {
 		panic(err)
 	}
 
-	db.AutoMigrate(&models.User{}, &models.Auction{}) // TODO: check if works, also add other tables
+	db.AutoMigrate(&models.User{}, &models.Auction{}, &models.Car{}) // TODO: check if works
 }
 
 func DB() *gorm.DB {
