@@ -11,14 +11,4 @@ type User struct {
 	Phone    string
 	Auction  []Auction `gorm:"many2many:favorite_auctions"`
 	Dob      time.Time
-
-	// 	id
-	// name
-	// surname
-	// email
-	// password
-	// phone
-	// auctions
-	// dob
-
 }

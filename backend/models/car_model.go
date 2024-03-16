@@ -16,5 +16,7 @@ type Car struct {
 	EngineSize  int
 	EnginePower int
 	DriveTrain  string
-	CatStatus   *string
+	CatStatus   string
+	AuctionID   uint
+	// Images      []string
 }
