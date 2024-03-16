@@ -8,6 +8,6 @@ type Auction struct {
 	EndTime       time.Time
 	StartingPrice int
 	MinimumBid    int
-	Images        []Images //TODO: images
+	Images        []string
 	Car           Car
 }
