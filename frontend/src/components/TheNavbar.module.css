@@ -1,4 +1,3 @@
-
 .signInText {
     font-size: 13px;
 }
@@ -8,10 +7,28 @@
 }
 
 .signInDiv:hover {
-    border: 2px solid cyan;
+    border: 1px solid cyan;
     border-radius: 10px;
 }
 
-.logo{
+.tab:hover {
+    border: 1px solid cyan;
+    border-radius: 10px;
+}
+
+.logo {
     width: 150px;
+}
+
+.outerDiv {
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .outerDiv {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
 }

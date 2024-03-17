@@ -1,0 +1,28 @@
+.form {
+    width: 420px;
+    border: black solid 1px;
+    border-radius: 10px;
+    padding: 10px;
+    background-image: url('../../public/search-background.png');
+}
+
+.formCol {
+    width: 100px;
+    padding: 5px;
+}
+
+.formRow {
+    padding: 5px;
+}
+
+.ButtonDiv {
+    text-align: center;
+}
+
+
+@media (max-width: 768px) {
+    .form {
+        width: 100%;
+        margin-right: 30px;
+    }
+}

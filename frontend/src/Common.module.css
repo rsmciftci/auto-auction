@@ -1,0 +1,12 @@
+.outerDiv {
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+
+@media (max-width: 768px) {
+    .outerDiv {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
