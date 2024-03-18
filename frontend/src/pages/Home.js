@@ -5,16 +5,76 @@ import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import { toast, Slide, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Home() {
 
     const [country, setCountry] = useState("Country")
-    const [city, setCity] = useState("")
+    const [city, setCity] = useState("City")
     const [minPrice, setMinPrice] = useState("")
     const [maxPrice, setMaxPrice] = useState("")
     const [make, setMake] = useState("Make")
-    const [model, setModel] = useState("")
+    const [model, setModel] = useState("Model")
+
+    function search() {
+        if (minPrice >= maxPrice) {
+            toast.error('Maximum price should be bigger than minimum price! ', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+                });   
+
+        } else if (city === "City") {
+            toast.error('Please choose a city! ', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+                });  
+        } else if (make === "Make") {
+            toast.error('Please choose a make! ', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+                });  
+        } else if (model === "Model") {
+            toast.error('Please choose a model! ', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+                });  
+        }
+
+        else {
+            // /cars/:city/:make/:model/:minPrice/:maxPrice
+            window.location.href = "/cars/" + city + "/" + make + "/" + model + "/" + minPrice + "/" + maxPrice;
+        }
+    }
 
 
     function returnCities(country) {
@@ -155,22 +215,22 @@ function Home() {
                     </Row>
                     <Row className={styles.formRow}>
                         <Col className={styles.formCol}>
-                            <Form.Control type="minPrice" value={minPrice} onChange={(e) => setMinPrice(e.target.value)} placeholder="Min price" />
+                            <Form.Control type="minPrice" value={minPrice} onChange={(e) => setMinPrice(e.target.value)} placeholder="Min price in £" />
 
                         </Col>
                         <Col className={styles.formCol}>
-                            <Form.Control type="minPrice" value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} placeholder="Max Price" />
+                            <Form.Control type="minPrice" value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} placeholder="Max Price in £" />
                         </Col>
                     </Row>
 
                     <div className={styles.ButtonDiv}>
-                        <Button variant="primary">Search Cars</Button>
+                        <Button variant="primary" onClick={() => search()}>Search Cars</Button>
                     </div>
 
                 </Form.Group>
 
             </Form>
-
+            <ToastContainer />
 
         </div >
     );

@@ -1,19 +1,23 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { BsPersonCircle } from "react-icons/bs";
 import Row from 'react-bootstrap/Row';
 import styles from './TheNavbar.module.css'
 import commonstyle from '../Common.module.css'
+import { useSelector } from 'react-redux';
 
 function TheNavbar() {
+
+    const path = useSelector(state => state.configSlice.path)
+    const pathAutoAuction = path + "autoauction.png" 
+
     return (
-     
+       
             <div className={commonstyle.outerDiv}>
                 <Navbar expand="lg">
                     <Container fluid>
-                        <Navbar.Brand href="#"><img className={styles.logo} src='autoauction.png' /></Navbar.Brand>
+                        <Navbar.Brand href="#"><img className={styles.logo} src={pathAutoAuction} alt='auto-auction' /></Navbar.Brand>
                         <Navbar.Toggle aria-controls="navbarScroll" />
                         <Navbar.Collapse id="navbarScroll">
                             <Nav
