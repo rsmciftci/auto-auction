@@ -1,22 +1,29 @@
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeLoginDrawer } from '../redux/loginDrawerSlice';
 
-function Login({ name, ...props }) {
+function Login() {
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+ 
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
+
+
+  const show = useSelector(state => state.persistedData.loginDrawerSlice.show)
+  const dispatch = useDispatch();
+
+  function close(){
+    dispatch(closeLoginDrawer())
+  }
 
   return (
     <>
     {/* TODO : remove the button, should be triggered by Sign In Image */}
-      <Button variant="primary" onClick={handleShow} className="me-2">  
-        {name}
-      </Button>
-      <Offcanvas show={show} onHide={handleClose} {...props}>
+   {console.log(show)}
+      <Offcanvas show={show} onHide={() => close()} placement='end'>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          <Offcanvas.Title>Login</Offcanvas.Title>
+        
         </Offcanvas.Header>
         <Offcanvas.Body>
           Some text as placeholder. In real life you can have the elements you

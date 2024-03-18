@@ -5,13 +5,19 @@ import { BsPersonCircle } from "react-icons/bs";
 import Row from 'react-bootstrap/Row';
 import styles from './TheNavbar.module.css'
 import commonstyle from '../Common.module.css'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Login from './Login';
+import { openLoginDrawer } from '../redux/loginDrawerSlice';
 
 function TheNavbar() {
 
     const path = useSelector(state => state.configSlice.path)
     const pathAutoAuction = path + "autoauction.png" 
+    const dispatch = useDispatch();
+
+    function openDrawer(){
+        dispatch(openLoginDrawer())
+    }
 
     return (
        
@@ -33,7 +39,7 @@ function TheNavbar() {
 
                             </Nav>
 
-                            <div className={styles.signInDiv}>
+                            <div className={styles.signInDiv} onClick={() => openDrawer()} >
                                 <Container className={styles.signInContainer}>
                                     <Row className={styles.signInImage}>
                                         <BsPersonCircle />
@@ -49,7 +55,7 @@ function TheNavbar() {
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
-                <Login key="end" placement="end" name="end" />
+                <Login />
             </div>
 
     );
