@@ -7,6 +7,7 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { toast, Slide, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import Login from '../components/Login';
 
 
 function Home() {

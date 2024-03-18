@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import styles from './TheNavbar.module.css'
 import commonstyle from '../Common.module.css'
 import { useSelector } from 'react-redux';
+import Login from './Login';
 
 function TheNavbar() {
 
@@ -48,6 +49,7 @@ function TheNavbar() {
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
+                <Login key="end" placement="end" name="end" />
             </div>
 
     );
