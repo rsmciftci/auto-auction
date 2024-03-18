@@ -8,6 +8,7 @@ import commonstyle from '../Common.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import Login from './Login';
 import { openLoginDrawer } from '../redux/loginDrawerSlice';
+import CreateAccount from './CreateAccount';
 
 function TheNavbar() {
 
@@ -56,6 +57,7 @@ function TheNavbar() {
                     </Container>
                 </Navbar>
                 <Login />
+                <CreateAccount />
             </div>
 
     );

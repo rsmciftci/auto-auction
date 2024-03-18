@@ -1,0 +1,11 @@
+.loginButtonDiv {
+
+    display: flex;
+    justify-content: center;
+
+}
+
+.formLabel {
+    font-size: 14px;
+    font-weight: bold;
+}
