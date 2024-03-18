@@ -89,6 +89,16 @@ function Home() {
         }
     }
 
+    function setCountryAndInitializeCity(value){
+        setCountry(value);
+        setCity("City");
+    }
+
+    function setMakeAndInitializeModel(value){
+        setMake(value);
+        setModel("Model");
+    }
+
     function returnModels(make) {
         if (make === "Audi") {
             return audiCarModels;
@@ -139,7 +149,7 @@ function Home() {
                     <Row className={styles.formRow}>
                         <Col className={styles.formCol}>
                             <Form.Select aria-label="Country"
-                                onClick={(e) => setCountry(e.target.value)}
+                                onClick={(e) => setCountryAndInitializeCity(e.target.value)}
                             >
                                 <option>Country</option>
                                 <option value="England">England</option>
@@ -176,7 +186,7 @@ function Home() {
                     <Row className={styles.formRow}>
                         <Col className={styles.formCol}>
                             <Form.Select type="make" placeholder="Make"
-                                onClick={(e) => setMake(e.target.value)}
+                                onClick={(e) => setMakeAndInitializeModel(e.target.value)}
                             >
                                 <option>Make</option>
                                 {
