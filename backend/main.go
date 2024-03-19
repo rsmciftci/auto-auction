@@ -1,19 +1,21 @@
-// package main
+package main
 
-// import (
-// 	"backend/config"
-// )
+import (
+	"backend/config"
+	"backend/controller"
 
-// func main() {
-// 	// Connect To Database
-// 	config.DatabaseInit()
-// 	gorm := config.DB()
+	"github.com/labstack/echo/v4"
+)
 
-// 	dbGorm, err := gorm.DB()
-// 	if err != nil {
-// 		panic(err)
-// 	}
+func main() {
 
-// 	dbGorm.Ping()
+	e := echo.New()
 
-// }
+	config.DatabaseInit()
+
+	e.POST("/user", controller.SaveUser)
+	e.GET("/login", controller.LoginUser)
+
+	e.Logger.Fatal(e.Start(":1323"))
+
+}

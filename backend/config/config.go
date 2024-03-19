@@ -25,9 +25,13 @@ func DatabaseInit() {
 		panic(err)
 	}
 
-	db.AutoMigrate(&models.User{}, &models.Auction{}, &models.Car{}) // TODO: check if works
+	//
 }
 
-func DB() *gorm.DB {
+func ReturnDB() *gorm.DB {
 	return db
+}
+
+func Migrate() {
+	db.AutoMigrate(&models.User{}, &models.Auction{}, &models.Car{})
 }
