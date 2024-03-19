@@ -21,7 +21,7 @@ func main() {
 	config.DatabaseInit()
 
 	e.POST("/user", controller.SaveUser)
-	e.GET("/login", controller.LoginUser)
+	e.POST("/login", controller.LoginUser)
 
 	e.Logger.Fatal(e.Start(":1323"))
 

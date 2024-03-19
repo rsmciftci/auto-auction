@@ -3,6 +3,7 @@ package controller
 import (
 	"backend/config"
 	"backend/models"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -51,7 +52,16 @@ func LoginUser(c echo.Context) error {
 	data := new(LoginData)
 	c.Bind(data)
 
+	fmt.Println(data)
+
+	if data.Email == "" || data.Password == "" {
+		return c.JSON(http.StatusBadRequest, "Email or Password cannot be null or!")
+	}
+
 	result := db.Where(&models.User{Email: data.Email, Password: data.Password}).Find(user)
+
+	fmt.Println(user)
+	fmt.Println(data)
 
 	if result.RowsAffected == 0 {
 		return c.JSON(http.StatusNotFound, "User not found")
@@ -67,6 +77,6 @@ func LoginUser(c echo.Context) error {
 		Dob:     user.Dob,
 	}
 
-	return c.JSON(http.StatusFound, userWithouthPassword)
+	return c.JSON(http.StatusOK, userWithouthPassword)
 
 }
