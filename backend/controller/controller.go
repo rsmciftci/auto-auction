@@ -4,6 +4,7 @@ import (
 	"backend/config"
 	"backend/models"
 	"net/http"
+	"time"
 
 	"github.com/labstack/echo/v4"
 )
@@ -33,6 +34,16 @@ type LoginData struct {
 	Email    string
 }
 
+type UserWithouthPassword struct {
+	ID      uint
+	Name    string
+	Surname string
+	Email   string
+	Phone   string
+	Auction *[]models.Auction
+	Dob     time.Time
+}
+
 func LoginUser(c echo.Context) error {
 	db := config.ReturnDB()
 	user := new(models.User)
@@ -46,6 +57,16 @@ func LoginUser(c echo.Context) error {
 		return c.JSON(http.StatusNotFound, "User not found")
 	}
 
-	return c.JSON(http.StatusFound, user)
+	userWithouthPassword := UserWithouthPassword{
+		ID:      user.ID,
+		Name:    user.Name,
+		Surname: user.Surname,
+		Email:   user.Email,
+		Phone:   user.Phone,
+		Auction: user.Auction,
+		Dob:     user.Dob,
+	}
+
+	return c.JSON(http.StatusFound, userWithouthPassword)
 
 }
