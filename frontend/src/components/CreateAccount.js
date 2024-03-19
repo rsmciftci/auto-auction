@@ -15,6 +15,7 @@ function CreateAccount() {
   const [surname, setSurname] = useState("");
   const [dob, setDob] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [password1, setPassword1] = useState("");
 
@@ -23,6 +24,7 @@ function CreateAccount() {
     surname: surname,
     dob: convertDateFormat(dob) + "T00:00:00Z",
     email: email,
+    phone: phone,
     password: password
   }
 
@@ -58,7 +60,7 @@ function CreateAccount() {
   function toastSuccess() {
     toast.success('Succesfully registered!', {
       position: "bottom-right",
-      autoClose: 1000,
+      autoClose: 500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -124,6 +126,11 @@ function CreateAccount() {
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label className={styles.formLabel}>Email address</Form.Label>
               <Form.Control type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label className={styles.formLabel}>Phone</Form.Label>
+              <Form.Control type="phone" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
