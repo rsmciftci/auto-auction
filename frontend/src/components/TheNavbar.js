@@ -39,9 +39,9 @@ function TheNavbar() {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Nav.Link className={styles.tab} href="http://localhost:3000">Home</Nav.Link>
-                            <Nav.Link className={styles.tab} href="http://localhost:3000/ending-soon">Ending soon</Nav.Link>
-                            <Nav.Link className={styles.tab} href="http://localhost:3000/sell-your-car">Sell your car</Nav.Link>
+                            <Nav.Link className={styles.tab} href={path}>Home</Nav.Link>
+                            <Nav.Link className={styles.tab} href={path + "ending-soon"}>Ending soon</Nav.Link>
+                            <Nav.Link className={styles.tab} href={path + "sell-your-car"}>Sell your car</Nav.Link>
 
 
                         </Nav>
