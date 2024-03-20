@@ -9,36 +9,43 @@ import { useDispatch, useSelector } from 'react-redux';
 import Login from './Login';
 import { openLoginDrawer } from '../redux/loginDrawerSlice';
 import CreateAccount from './CreateAccount';
+import { ToastContainer } from 'react-toastify';
+import Button from 'react-bootstrap/esm/Button';
+import { initializeUser } from '../redux/userSlice';
 
 function TheNavbar() {
 
     const path = useSelector(state => state.configSlice.path)
-    const pathAutoAuction = path + "autoauction.png" 
+    const user = useSelector(state => state.persistedData.userSlice)
+    const pathAutoAuction = path + "autoauction.png"
     const dispatch = useDispatch();
 
-    function openDrawer(){
+    function openDrawer() {
         dispatch(openLoginDrawer())
     }
 
     return (
-       
-            <div className={commonstyle.outerDiv}>
-                <Navbar expand="lg">
-                    <Container fluid>
-                        <Navbar.Brand href="#"><img className={styles.logo} src={pathAutoAuction} alt='auto-auction' /></Navbar.Brand>
-                        <Navbar.Toggle aria-controls="navbarScroll" />
-                        <Navbar.Collapse id="navbarScroll">
-                            <Nav
-                                className="me-auto my-2 my-lg-0"
-                                style={{ maxHeight: '100px' }}
-                                navbarScroll
-                            >
-                                <Nav.Link className={styles.tab} href="#action1">Home</Nav.Link>
-                                <Nav.Link className={styles.tab} href="#action3">Ending soon</Nav.Link>
-                                <Nav.Link className={styles.tab} href="#action4">Sell your car</Nav.Link>
+
+        <div className={commonstyle.outerDiv}>
+            {console.log(user)}
+            <Navbar expand="lg">
+                <Container fluid>
+                    <Navbar.Brand href="#"><img className={styles.logo} src={pathAutoAuction} alt='auto-auction' /></Navbar.Brand>
+                    <Navbar.Toggle aria-controls="navbarScroll" />
+                    <Navbar.Collapse id="navbarScroll">
+                        <Nav
+                            className="me-auto my-2 my-lg-0"
+                            style={{ maxHeight: '100px' }}
+                            navbarScroll
+                        >
+                            <Nav.Link className={styles.tab} href="#action1">Home</Nav.Link>
+                            <Nav.Link className={styles.tab} href="#action3">Ending soon</Nav.Link>
+                            <Nav.Link className={styles.tab} href="#action4">Sell your car</Nav.Link>
 
 
-                            </Nav>
+                        </Nav>
+
+                        {!user.ID ?
 
                             <div className={styles.signInDiv} onClick={() => openDrawer()} >
                                 <Container className={styles.signInContainer}>
@@ -52,13 +59,17 @@ function TheNavbar() {
                                 </Container>
                             </div>
 
+                            : 
+                            <Button onClick={() => dispatch(initializeUser())} >Log Out</Button>
+                            }
 
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
-                <Login />
-                <CreateAccount />
-            </div>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+            <Login />
+            <CreateAccount />
+            <ToastContainer />
+        </div>
 
     );
 }

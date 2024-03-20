@@ -6,7 +6,7 @@ const axiosInstance = axios.create({
 
 const userService = {
     saveUser: (data) => axiosInstance.post("user", data),
-    login: (data) => axiosInstance.post("login", data)
+    login: (loginData) => axiosInstance.post("login",loginData)
 }
 
 export default userService;
