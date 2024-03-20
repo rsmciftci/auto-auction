@@ -33,5 +33,5 @@ func ReturnDB() *gorm.DB {
 }
 
 func Migrate() {
-	db.AutoMigrate(&models.User{}, &models.Auction{}, &models.Car{})
+	db.AutoMigrate(&models.User{}, &models.Auction{}, &models.Car{}, &models.Image{})
 }

@@ -19,6 +19,7 @@ func main() {
 	))
 
 	config.DatabaseInit()
+	config.Migrate()
 
 	e.POST("/user", controller.SaveUser)
 	e.POST("/login", controller.LoginUser)

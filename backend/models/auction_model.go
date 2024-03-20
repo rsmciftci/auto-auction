@@ -9,4 +9,5 @@ type Auction struct {
 	StartingPrice int
 	MinimumBid    int
 	Car           Car
+	Images        *[]Image
 }

@@ -18,5 +18,4 @@ type Car struct {
 	DriveTrain  string
 	CatStatus   string
 	AuctionID   uint
-	// Images      []string
 }
