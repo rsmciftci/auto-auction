@@ -60,9 +60,6 @@ func LoginUser(c echo.Context) error {
 
 	result := db.Where(&models.User{Email: data.Email, Password: data.Password}).Find(user)
 
-	fmt.Println(user)
-	fmt.Println(data)
-
 	if result.RowsAffected == 0 {
 		return c.JSON(http.StatusNotFound, "User not found")
 	}
