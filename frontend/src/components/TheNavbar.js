@@ -12,10 +12,11 @@ import CreateAccount from './CreateAccount';
 import { ToastContainer } from 'react-toastify';
 import Button from 'react-bootstrap/esm/Button';
 import { initializeUser } from '../redux/userSlice';
+import { FRONTEND_URL } from '../config';
 
 function TheNavbar() {
 
-    const path = useSelector(state => state.configSlice.path)
+    const path = FRONTEND_URL;
     const user = useSelector(state => state.persistedData.userSlice)
     const pathAutoAuction = path + "autoauction.png"
     const dispatch = useDispatch();
@@ -38,9 +39,9 @@ function TheNavbar() {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Nav.Link className={styles.tab} href="#action1">Home</Nav.Link>
-                            <Nav.Link className={styles.tab} href="#action3">Ending soon</Nav.Link>
-                            <Nav.Link className={styles.tab} href="#action4">Sell your car</Nav.Link>
+                            <Nav.Link className={styles.tab} href="http://localhost:3000">Home</Nav.Link>
+                            <Nav.Link className={styles.tab} href="http://localhost:3000/ending-soon">Ending soon</Nav.Link>
+                            <Nav.Link className={styles.tab} href="http://localhost:3000/sell-your-car">Sell your car</Nav.Link>
 
 
                         </Nav>

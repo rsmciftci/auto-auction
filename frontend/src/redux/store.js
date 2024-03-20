@@ -1,7 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore } from 'redux-persist'
-import configSlice from "./configSlice"
 import loginDrawerSlice from "./loginDrawerSlice"
 import createAccountDrawerSlice from "./createAccountDrawerSlice"
 import userSlice from "./userSlice"
@@ -30,8 +29,7 @@ export const store = configureStore({
         }),
 
     reducer: {
-        persistedData : persistedReducer,
-        configSlice : configSlice
+        persistedData : persistedReducer
     },
 })
 
