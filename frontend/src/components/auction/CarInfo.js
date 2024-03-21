@@ -6,10 +6,12 @@ import { ALLMAKES, AUDI_MODELS, BENTLEY_MODELS, BMW_MODELS, BODY_TYPE, BUGATTI_M
 import { useState } from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import auctionService from '../../services/AuctionService';
-import { GrPrevious } from "react-icons/gr";
+import { BACKEND_URL } from '../../config';
+import axios from 'axios';
 function CarInfo() {
 
     const [componentState, setComponentState] = useState("initialState");
+    const [auctionID, setAuctionID] = useState();
 
 
     const [uploadedFiles, setUploadedFiles] = useState([])
@@ -128,16 +130,68 @@ function CarInfo() {
         }
     }
 
-    // function saveAuctionAndCar() {
-    //     auctionService.createAuction(RequestBody)
-    //         .then(function (response) {
-    //             alert("Succeed")
-    //         })
-    //         .catch(function (error) {
-    //             alert("Fail")
-    //         });
+    function saveAuctionAndCar() {
+        auctionService.createAuction(RequestBody)
+            .then(function (response) {
+                setAuctionID(response.data.ID)
+                setComponentState("Render Image Upload")
+              
+            })
+            .catch(function (error) {
+                alert("Fail")
+            });
 
-    // }
+    }
+
+
+
+
+    const [formData, setFormData] = useState({
+        files: []
+    });
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleFileChange = (event) => {
+        setFormData({
+            ...formData,
+            files: event.target.files
+        });
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const formDataToSend = new FormData();
+        formDataToSend.append('auctionId', auctionID); // TODO: auction ID
+        for (let i = 0; i < formData.files.length; i++) {
+            formDataToSend.append('files', formData.files[i]);
+        }
+
+        try {
+
+            const axiosInstance = axios.create({
+                baseURL: BACKEND_URL,
+            });
+
+            const response = await axiosInstance.post('/upload', formDataToSend, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+        } catch (error) {
+            console.error('Error uploading images:', error);
+        }
+    };
+
+
 
 
 
@@ -424,7 +478,7 @@ function CarInfo() {
                         <hr></hr>
 
                         <div className={styles.buttonDiv}>
-                            <Button onClick={() => setComponentState("Image")}>Next</Button>
+                            <Button onClick={() => saveAuctionAndCar()}>Create Auction</Button>
                         </div>
 
                     </div>
@@ -436,14 +490,28 @@ function CarInfo() {
                         </div>
                         <hr></hr>
 
-                        <input id='fileUpload' type='file' multiple  accept='image/png'/>
-                        <label htmlFor='fileUpload'>    <a className='btn btn-primary'> Upload Files </a></label>
+                        <form >
+                            <div>
+                                <label htmlFor="images">Upload Images:</label>
+                                <br></br>
+                                <input
+                                    type="file"
+                                    id="images"
+                                    name="images"
+                                    accept="image/*"
+                                    multiple
+                                    onChange={handleFileChange}
+                                />
+                            </div>
+                           
+                        </form>
+                       
 
 
                         <hr></hr>
+                        <button type="submit" onClick={(e) => handleSubmit(e)}>Submit</button>
 
-                        <GrPrevious onClick={() => setComponentState("initialState")} />
-                        
+                      
                     </div>
             }
         </div>

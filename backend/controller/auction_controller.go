@@ -26,14 +26,15 @@ func CreateAuctionCarAndImage(c echo.Context) error {
 	}
 
 	auction := &dto.Auction
-	fmt.Println(auction)
 	tx.Create(&auction)
 
 	car := &dto.Car
 	car.AuctionID = auction.ID
 
+	fmt.Println(&car.AuctionID)
+
 	tx.Create(&car)
 	tx.Commit()
 
-	return c.JSON(http.StatusCreated, "auction")
+	return c.JSON(http.StatusOK, auction)
 }

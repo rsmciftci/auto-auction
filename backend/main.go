@@ -26,6 +26,8 @@ func main() {
 
 	e.POST("/create-auction-car-images", controller.CreateAuctionCarAndImage)
 
+	e.POST("/upload", controller.SaveImage)
+
 	e.Logger.Fatal(e.Start(":1323"))
 
 }
