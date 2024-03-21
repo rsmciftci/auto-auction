@@ -8,6 +8,8 @@ import Button from 'react-bootstrap/esm/Button';
 import auctionService from '../../services/AuctionService';
 import { BACKEND_URL } from '../../config';
 import axios from 'axios';
+import { toast, Slide, ToastContainer } from 'react-toastify'
+
 function CarInfo() {
 
     const [componentState, setComponentState] = useState("initialState");
@@ -37,6 +39,35 @@ function CarInfo() {
     const [catStatus, setCatStatus] = useState("Cat Status");
     const [milage, setMilage] = useState();
     const [year, setYear] = useState("Year");
+
+
+    function toastErr(message) {
+        toast.error(message, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Slide,
+        });
+    }
+
+    function toastSucccess(message) {
+        toast.success(message, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Slide,
+        });
+    }
 
 
     const RequestBody = {
@@ -135,10 +166,11 @@ function CarInfo() {
             .then(function (response) {
                 setAuctionID(response.data.ID)
                 setComponentState("Render Image Upload")
-              
+                toastSucccess("Successfully Saved!");
+
             })
             .catch(function (error) {
-                alert("Fail")
+                toastErr("Something Went Wrong!")
             });
 
     }
@@ -186,8 +218,10 @@ function CarInfo() {
                 }
             });
 
+            toastSucccess("Images Successfully Uploaded!")
+
         } catch (error) {
-            console.error('Error uploading images:', error);
+            toastErr("Something Went Wrong!");
         }
     };
 
@@ -503,17 +537,18 @@ function CarInfo() {
                                     onChange={handleFileChange}
                                 />
                             </div>
-                           
+
                         </form>
-                       
+
 
 
                         <hr></hr>
                         <button type="submit" onClick={(e) => handleSubmit(e)}>Submit</button>
 
-                      
+
                     </div>
             }
+            <ToastContainer />
         </div>
     );
 
