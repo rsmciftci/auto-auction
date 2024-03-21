@@ -24,6 +24,8 @@ func main() {
 	e.POST("/user", controller.SaveUser)
 	e.POST("/login", controller.LoginUser)
 
+	e.POST("/create-auction-car-images", controller.CreateAuctionCarAndImage)
+
 	e.Logger.Fatal(e.Start(":1323"))
 
 }

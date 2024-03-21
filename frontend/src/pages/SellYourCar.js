@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import CarInfo from "../components/auction/CarInfo";
 
 function SellYourCar() {
 
@@ -7,9 +8,9 @@ function SellYourCar() {
     return (
         <div>
             {user.ID === null ?
-                "need to login"
+                <h1>You need to login</h1>
                 :
-                "logged in"
+                <CarInfo />
             }
 
         </div>
