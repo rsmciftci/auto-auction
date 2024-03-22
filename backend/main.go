@@ -21,12 +21,15 @@ func main() {
 	config.DatabaseInit()
 	config.Migrate()
 
+	e.Static("/images", "images")
 	e.POST("/user", controller.SaveUser)
 	e.POST("/login", controller.LoginUser)
 
 	e.POST("/create-auction-car-images", controller.CreateAuctionCarAndImage)
 
 	e.POST("/upload", controller.SaveImage)
+
+	e.GET("/auction/:id", controller.FindAuctionById)
 
 	e.Logger.Fatal(e.Start(":1323"))
 

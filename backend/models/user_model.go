@@ -19,11 +19,11 @@ import (
 
 type User struct {
 	ID       uint
-	Name     string     `json:"name"`
-	Surname  string     `json:"surname"`
-	Email    string     `json:"email" gorm:"unique"`
-	Password string     `json:"password"`
-	Phone    string     `json:"phone"`
-	Auction  *[]Auction `gorm:"many2many:favorite_auctions"`
-	Dob      time.Time  `json:"dob"`
+	Name     string `json:"name"`
+	Surname  string `json:"surname"`
+	Email    string `json:"email" gorm:"unique"`
+	Password string `json:"password"`
+	Phone    string `json:"phone"`
+	Auction  *[]Auction
+	Dob      time.Time `json:"dob"`
 }

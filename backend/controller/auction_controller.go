@@ -38,3 +38,22 @@ func CreateAuctionCarAndImage(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, auction)
 }
+
+func FindAuctionById(c echo.Context) error {
+	fmt.Println("id")
+
+	id := c.Param("id")
+
+	db := config.ReturnDB()
+
+	auction := new(models.Auction)
+
+	result := db.Preload("Images").Preload("Car").First(&auction, id)
+
+	if result.Error != nil {
+		return c.JSON(http.StatusBadRequest, "Something went wrong!")
+	}
+
+	return c.JSON(http.StatusOK, &auction)
+
+}

@@ -10,4 +10,5 @@ type Auction struct {
 	MinimumBid    int
 	Car           Car
 	Images        *[]Image
+	UserID        uint
 }
