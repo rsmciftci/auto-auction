@@ -30,6 +30,7 @@ func main() {
 	e.POST("/upload", controller.SaveImage)
 
 	e.GET("/auction/:id", controller.FindAuctionById)
+	e.GET("/auctions", controller.FindAuctionsEndingSoon)
 
 	e.Logger.Fatal(e.Start(":1323"))
 

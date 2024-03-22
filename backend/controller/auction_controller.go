@@ -5,6 +5,7 @@ import (
 	"backend/models"
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/labstack/echo/v4"
 )
@@ -40,7 +41,6 @@ func CreateAuctionCarAndImage(c echo.Context) error {
 }
 
 func FindAuctionById(c echo.Context) error {
-	fmt.Println("id")
 
 	id := c.Param("id")
 
@@ -55,5 +55,21 @@ func FindAuctionById(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, &auction)
+
+}
+
+func FindAuctionsEndingSoon(c echo.Context) error {
+
+	db := config.ReturnDB()
+
+	auctions := new([]models.Auction)
+
+	result := db.Where("end_time > ?", time.Now()).Order("end_time asc").Preload("Images").Preload("Car").Find(auctions)
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return c.JSON(http.StatusOK, &auctions)
 
 }
