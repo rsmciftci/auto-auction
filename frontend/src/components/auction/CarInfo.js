@@ -9,8 +9,11 @@ import auctionService from '../../services/AuctionService';
 import { BACKEND_URL } from '../../config';
 import axios from 'axios';
 import { toast, Slide, ToastContainer } from 'react-toastify'
+import {  useSelector } from 'react-redux';
 
 function CarInfo() {
+
+    const userId = useSelector(state => state.persistedData.userSlice.ID)
 
     const [componentState, setComponentState] = useState("initialState");
     const [auctionID, setAuctionID] = useState();
@@ -96,7 +99,8 @@ function CarInfo() {
             StartTime: convertDateFormat(auctionStartDate) + "T00:00:00Z",
             EndTime: convertDateFormat(auctionEndDate) + "T00:00:00Z",
             StartingPrice: parseInt(startingPrice),
-            MinimumBid: parseInt(minimumBid)
+            MinimumBid: parseInt(minimumBid),
+            UserId : userId
         }
 
     }
