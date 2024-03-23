@@ -22,6 +22,12 @@
     /* Optional: Add border for visual separation */
 }
 
+.pagination {
+   margin-top: 50px;
+    bottom: 0;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     .mainDiv {
         width: 100%;

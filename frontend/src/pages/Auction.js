@@ -78,14 +78,6 @@ function Auction() {
                     <hr></hr>
                     <h6>Current Bid : ? </h6>
                     <h6>Bid Field & Button</h6>
-                    {/*         
-
-
-
-DriveTrain: "Front-wheel drive (FWD)"​
-FuelType: "Diesel"​
-Gearbox: "Automatic"​
- */}
 
                 </div>
 

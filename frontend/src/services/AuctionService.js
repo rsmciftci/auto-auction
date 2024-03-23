@@ -8,6 +8,8 @@ const axiosInstance = axios.create({
 const auctionService = {
     createAuction: (data) => axiosInstance.post("create-auction-car-images", data),
     getAuctionById: (id) => axiosInstance.get("auction/"+id),
+    getAuctionsEndingSoon :() => axiosInstance.get("auctions"),
+    getAuctionsByUserId :(userId) => axiosInstance.get("auctions/user/"+userId),
 }
 
 export default auctionService;

@@ -1,86 +1,138 @@
-import ImageGallery from "react-image-gallery";
 import styles from './EndingSoon.module.css';
+import { useEffect, useState } from "react";
+import auctionService from "../services/AuctionService";
+import { useParams } from "react-router-dom";
+import { BACKEND_URL, FRONTEND_URL } from "../config";
+import ReactImageGallery from "react-image-gallery";
+import Pagination from 'react-bootstrap/Pagination';
 
 function EndingSoon() {
 
-    const images = [
-        {
-            original: "https://picsum.photos/id/1018/1000/600/",
-            thumbnail: "https://picsum.photos/id/1018/250/150/",
-        },
-        {
-            original: "https://picsum.photos/id/1015/1000/600/",
-            thumbnail: "https://picsum.photos/id/1015/250/150/",
-        },
-        {
-            original: "https://picsum.photos/id/1019/1000/600/",
-            thumbnail: "https://picsum.photos/id/1019/250/150/",
-        },
-        {
-            original: "https://picsum.photos/id/1018/1000/600/",
-            thumbnail: "https://picsum.photos/id/1018/250/150/",
-        },
-        {
-            original: "https://picsum.photos/id/1015/1000/600/",
-            thumbnail: "https://picsum.photos/id/1015/250/150/",
-        },
-        {
-            original: "https://picsum.photos/id/1019/1000/600/",
-            thumbnail: "https://picsum.photos/id/1019/250/150/",
-        },
-    ];
+    const [imagesList, setImagesList] = useState([]);
+
+    const { page } = useParams();
+
+    const [auctions, setAuctions] = useState([])
+    const numberOfItemsPerPage = 8;
+    const maxPages = Math.ceil(auctions.length / numberOfItemsPerPage)
+
+
+
+    useEffect(
+        () => {
+
+            auctionService.getAuctionsEndingSoon()
+                .then(response => {
+                    setAuctions(response.data);
+                    console.log(response.data)
+                    response.data.map(
+                        auction => {
+                            let images = [];
+                            auction.Images.map(image =>
+                                images = [
+                                    ...images,
+                                    {
+                                        original: BACKEND_URL + image.Path,
+                                        thumbnail: BACKEND_URL + image.Path,
+                                    },
+                                ]
+                            )                           
+
+                            setImagesList(imagesList => [...imagesList, images])
+                            return images;
+                            
+                        } 
+                    )
+                }
+                ).catch(error => {
+                    console.error('Error:', error);
+                });
+
+        }
+        , []);
+
+
+
+
+
+    function ReturnFirstIndex(page) {
+
+        return (page - 1) * numberOfItemsPerPage;
+
+    }
+
+    function ReturnSecondIndex(page) {
+
+        return page * numberOfItemsPerPage;
+
+    }
+
+    function RedirectToFirst() {
+        window.location.href = FRONTEND_URL + "ending-soon/1";
+    }
+    function RedirectToPrevious() {
+        if (page > 1) {
+            window.location.href = FRONTEND_URL + "ending-soon/" + page - 1;
+        }
+    }
+
+    function RedirectToNext() {
+        if (page < maxPages) {
+            window.location.href = FRONTEND_URL + "ending-soon/" + page + 1;
+        }
+    }
+
+    function RedirectToLast() {
+        if (page < maxPages) {
+            window.location.href = FRONTEND_URL + "ending-soon/" + maxPages;
+        }
+    }
+
+    function OpenAuction(id){
+        window.location.href = FRONTEND_URL + "auction/" + id;
+    }
+
 
     return (
         <div className={styles.mainDiv}>
+            {
+                auctions.slice(ReturnFirstIndex(page), ReturnSecondIndex(page)).map((auction, index) =>
 
 
-            <div className={styles.div} onClick={() => console.log("TEST")}>
-                <ImageGallery items={images} thumbnailPosition="bottom" showPlayButton={false} showNav={false} showFullscreenButton={false} />
-                <h6>BMW - M6 ( 2015 )</h6>
-                <h6>2000 £</h6>
-            </div>
-            <div className={styles.div}>
-                <ImageGallery items={images} thumbnailPosition="bottom" showPlayButton={false} showNav={false} showFullscreenButton={false}/>
-                <h6>BMW - M6 ( 2015 )</h6>
-                <h6>2000 £</h6>
-            </div>
-            <div className={styles.div}>
-                <ImageGallery items={images} thumbnailPosition="bottom" showPlayButton={false} showNav={false} showFullscreenButton={false}/>
-                <h6>BMW - M6 ( 2015 )</h6>
-                <h6>2000 £</h6>
-            </div>
-            <div className={styles.div}>
-                <ImageGallery items={images} thumbnailPosition="bottom" showPlayButton={false} showNav={false} showFullscreenButton={false}/>
-                <h6>BMW - M6 ( 2015 )</h6>
-                <h6>2000 £</h6>
-            </div>
-            <div className={styles.div}>
-                <ImageGallery items={images} thumbnailPosition="bottom" showPlayButton={false} showNav={false} showFullscreenButton={false} />
-                <h6>BMW - M6 ( 2015 )</h6>
-                <h6>2000 £</h6>
-            </div>
-            <div className={styles.div}>
-                <ImageGallery items={images} thumbnailPosition="bottom" showPlayButton={false} showNav={false} showFullscreenButton={false}/>
-                <h6>BMW - M6 ( 2015 )</h6>
-                <h6>2000 £</h6>
-            </div>
-            <div className={styles.div}>
-                <ImageGallery items={images} thumbnailPosition="bottom" showPlayButton={false} showNav={false} showFullscreenButton={false}/>
-                <h6>BMW - M6 ( 2015 )</h6>
-                <h6>2000 £</h6>
-            </div>
-            <div className={styles.div}>
-                <ImageGallery items={images} thumbnailPosition="bottom" showPlayButton={false} showNav={false} showFullscreenButton={false}/>
-                <h6>BMW - M6 ( 2015 )</h6>
-                <h6>2000 £</h6>
-            </div>
+                    <div className={styles.div} onClick={() => OpenAuction(auction.ID)}>
 
-        
 
-            <>
-                Pagination
-            </>
-            
+                        <ReactImageGallery items={imagesList[index]} thumbnailPosition="bottom" showPlayButton={false} showNav={false} showFullscreenButton={false} />
+
+                        <h6 key={index+1 + "car"}>{auction.Car.Make} - {auction.Car.Model} ( {auction.Car.Year} )</h6>
+                        <h6 key={index+2 + "milage"} >Milage : {auction.Car.Milage} £ </h6>
+                        <h6 key={index+3 + "pricex"}>Starting Price : {auction.StartingPrice} £ </h6>
+                        <h6 key={index+4 + "test"}>Current Price : ? £ </h6>
+                    </div>
+
+
+                )
+            }
+
+
+            {
+
+            }
+
+            {maxPages > 1 ?
+                <div className={styles.pagination}>
+                    <Pagination>
+                        <Pagination.First onClick={() => RedirectToFirst()} />
+                        <Pagination.Prev onClick={() => RedirectToPrevious()} />
+                        <Pagination.Item>{page}</Pagination.Item>
+                        <Pagination.Next onClick={() => RedirectToNext()} />
+                        <Pagination.Last onClick={() => RedirectToLast()} />
+                    </Pagination>
+                </div>
+                :
+                ""
+
+            }
 
 
         </div>
