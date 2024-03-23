@@ -73,3 +73,21 @@ func FindAuctionsEndingSoon(c echo.Context) error {
 	return c.JSON(http.StatusOK, &auctions)
 
 }
+
+func FindAuctionsByUserId(c echo.Context) error {
+
+	userId := c.Param("id")
+
+	db := config.ReturnDB()
+
+	auctions := new([]models.Auction)
+
+	result := db.Where("user_id =?", userId).Preload("Images").Preload("Car").Find(auctions)
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return c.JSON(http.StatusOK, &auctions)
+
+}

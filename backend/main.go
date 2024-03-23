@@ -31,6 +31,7 @@ func main() {
 
 	e.GET("/auction/:id", controller.FindAuctionById)
 	e.GET("/auctions", controller.FindAuctionsEndingSoon)
+	e.GET("/auctions/user/:id", controller.FindAuctionsByUserId)
 
 	e.Logger.Fatal(e.Start(":1323"))
 
