@@ -40,8 +40,19 @@ function TheNavbar() {
                             navbarScroll
                         >
                             <Nav.Link className={styles.tab} href={path}>Home</Nav.Link>
-                            <Nav.Link className={styles.tab} href={path + "ending-soon"}>Ending soon</Nav.Link>
+                            <Nav.Link className={styles.tab} href={path + "ending-soon/1"}>Ending soon</Nav.Link>
                             <Nav.Link className={styles.tab} href={path + "sell-your-car"}>Sell your car</Nav.Link>
+
+
+
+
+                            {!user.ID ?
+
+                                ""
+
+                                :
+                                <><Nav.Link className={styles.tab} href={path + "my-auctions/1"}>My Auctions</Nav.Link><Nav.Link className={styles.tab} href={path + "favourites"}>Favourites</Nav.Link></>
+                            }
 
 
                         </Nav>
@@ -60,9 +71,9 @@ function TheNavbar() {
                                 </Container>
                             </div>
 
-                            : 
+                            :
                             <Button onClick={() => dispatch(initializeUser())} >Log Out</Button>
-                            }
+                        }
 
                     </Navbar.Collapse>
                 </Container>
